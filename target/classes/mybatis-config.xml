@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <package name="com.xxr.pojo"/>
+    </typeAliases>
+
+    <!--    配置数据库环境，设置默认的数据库连接-->
+    <environments default="remote">
+
+
+        <environment id="local">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///mybatis?userSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="sll520"/>
+            </dataSource>
+        </environment>
+
+        <environment id="remote">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://120.77.92.117:3306/Examination"/>
+                <property name="username" value="dev"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+
+
+    </environments>
+
+
+    <mappers>
+        <package name="com.xxr.mapper"/>
+    </mappers>
+</configuration>

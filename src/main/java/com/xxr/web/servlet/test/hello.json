@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "createDate": "2022-07-18 00:00",
+      "judgeNum": 6,
+      "mulNum": 8,
+      "name": "第五次月考",
+      "paperId": 13,
+      "singleNum": 10,
+      "userId": 1
+    },
+    {
+      "createDate": "2022-07-18 00:00",
+      "judgeNum": 4,
+      "mulNum": 6,
+      "name": "第四次月考",
+      "paperId": 14,
+      "singleNum": 12,
+      "userId": 2
+    },
+    {
+      "createDate": "2022-07-18 21:21",
+      "judgeNum": 1,
+      "mulNum": 10,
+      "name": "Test",
+      "paperId": 15,
+      "singleNum": 8,
+      "userId": 1
+    },
+    {
+      "createDate": "2022-07-18 21:52",
+      "judgeNum": 1,
+      "mulNum": 10,
+      "name": "Test",
+      "paperId": 16,
+      "singleNum": 8,
+      "userId": 1
+    }
+  ],
+  "totalCount": 23
+}

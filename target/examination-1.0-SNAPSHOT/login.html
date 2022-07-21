@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link href="css/login.css" rel="stylesheet">
+</head>
+
+<body>
+<script type="text/javascript">
+    function refreshCode() {
+        // 切换验证码
+        let vcode = document.getElementById("vcode");
+        vcode.src = "/examination/checkCodeServlet?time=" + new Date().getTime();
+
+    }
+
+</script>
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/vue.js"></script>
+
+
+<div id="loginDiv">
+<!--    /examination/loginServlet-->
+<!--    <form action="/examination/">-->
+        <h1 id="loginMsg">LOGIN IN</h1>
+        <p>StudentID:<input id="id" name="id" type="text"></p>
+
+        <p>Password:<input id="password" name="password" type="password"></p>
+
+        <p>CheckCode:<input id="checkcode" name="checkcode" type="text">
+            <a href="javascript:refreshCode()">
+                <img src="/examination/checkCodeServlet" title="看不清点击刷新" id="vcode"/>
+            </a>
+        </p>
+        <span>
+            <input type="radio" name="isStu" value="true"  checked/>学生
+            <input type="radio" name="isStu" value="false"/>老师
+        </span>
+
+        <div id="subDiv">
+            <input type="submit" class="button" id="submit"  value="登录" >
+            <button v-on:click="submitData">点击</button>
+            <input type="reset" class="button" id="reset" value="重置">&nbsp;&nbsp;&nbsp;
+            <a href="register.html">没有账号？点击注册</a>
+        </div>
+<!--    </form>-->
+    <table>
+        <tr>
+            <th>
+                {{name}}
+            </th>
+            <th>
+                {{studentId}}
+            </th>
+            <th>
+                {{majorId}}
+            </th>
+        </tr>
+    </table>
+
+</div>
+<script>
+    new Vue({
+        el:"#loginDiv",
+        data:{
+            name:"Jeson",
+            studentId:1,
+            majorId:1
+        },
+        methods:{
+            submitData:function (){
+                let that = this;
+                axios({
+                    method:"post",
+                    url:"http://localhost:8080/examination/testLoginServlet",
+                    data:"username=1234567&password=szxzczxc"
+                }).then(function (resp){
+                    that.name = "哈哈";
+                    that.name = resp.data.name;
+
+                    that.studentId = resp.data.studentId;
+                    that.majorId = resp.data.majorId;
+                })
+            }
+
+        }
+    })
+</script>
+
+</body>
+</html>

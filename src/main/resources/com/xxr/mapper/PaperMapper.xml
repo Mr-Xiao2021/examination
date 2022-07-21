@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxr.mapper.PaperMapper">
+
+    <resultMap id="paperResultMapper" type="paper">
+        <result property="paperId" column="paper_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createDate" column="createtime"/>
+    </resultMap>
+    <insert id="addPaper">
+        insert into papers (paper_id, name, score, singleNum, mulNum, judgeNum,brieflyNum, createtime,user_id)
+        values (#{paperId},#{name},null,#{singleNum},#{mulNum},#{judgeNum},#{brieflyNum},#{createDate},#{userId});
+    </insert>
+    <select id="getCurrentId" resultType="java.lang.Integer">
+        select paper_id
+        from papers
+        order by paper_id desc
+        limit 0,1;
+    </select>
+</mapper>

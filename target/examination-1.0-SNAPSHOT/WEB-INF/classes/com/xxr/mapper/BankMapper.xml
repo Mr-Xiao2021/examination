@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xxr.mapper.BankMapper">
+    <resultMap id="bankResultMap" type="bank">
+        <result property="id" column="bank_id"/>
+        <result property="createTime" column="createtime"/>
+    </resultMap>
+
+    <update id="updateBank">
+        update banks
+        <set>
+            <if test="name!=null and name!=''">
+                name = #{name},
+            </if>
+            <if test="remark!=null and remark!=''">
+                remark = #{remark},
+            </if>
+            <if test="createTime!=null">
+                createtime = #{createTime}
+            </if>
+        </set>
+        where bank_id = #{id}
+    </update>
+
+    <delete id="deleteByName">
+        delete
+        from banks
+        where name = #{name};
+    </delete>
+
+    <select id="getCurrentId" resultType="java.lang.Integer">
+        select bank_id
+        from banks
+        order by bank_id desc
+        limit 0,1;
+    </select>
+    <select id="getNameById" resultType="java.lang.String">
+        select name
+        from banks where bank_id = #{id} ;
+    </select>
+
+
+</mapper>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+        <form action="/examination/testLoginServlet" method="post">
+    <h1 id="loginMsg">LOGIN IN</h1>
+    <p>StudentID:<input id="id" name="id" type="text"></p>
+
+    <p>Password:<input id="password" name="password" type="password"></p>
+
+    <p>CheckCode:<input id="checkcode" name="checkcode" type="text">
+        <a href="javascript:refreshCode()">
+            <img src="/examination/checkCodeServlet" title="看不清点击刷新" id="vcode"/>
+        </a>
+    </p>
+    <span>
+            <input type="radio" name="isStu" value="true"  checked/>学生
+            <input type="radio" name="isStu" value="false"/>老师
+        </span>
+
+    <div id="subDiv">
+        <input type="submit" class="button" id="submit"  value="登录" >
+<!--        <button v-on:click="submitData">点击</button>-->
+        <input type="reset" class="button" id="reset" value="重置">&nbsp;&nbsp;&nbsp;
+        <a href="register.html">没有账号？点击注册</a>
+    </div>
+        </form>
+
+    <el-row>
+     <!--   <el-button>默认按钮</el-button>
+        <el-button type="primary">主要按钮</el-button>
+        <el-button type="success">成功按钮</el-button>
+        <el-button type="info">信息按钮</el-button>
+        <el-button type="warning">警告按钮</el-button>-->
+        <el-button type="danger">删除</el-button>
+    </el-row>
+<!--
+    <el-row>
+        <el-button plain>朴素按钮</el-button>
+        <el-button type="primary" plain>主要按钮</el-button>
+        <el-button type="success" plain>成功按钮</el-button>
+        <el-button type="info" plain>信息按钮</el-button>
+        <el-button type="warning" plain>警告按钮</el-button>
+        <el-button type="danger" plain>危险按钮</el-button>
+    </el-row>
+
+    <el-row>
+        <el-button round>圆角按钮</el-button>
+        <el-button type="primary" round>主要按钮</el-button>
+        <el-button type="success" round>成功按钮</el-button>
+        <el-button type="info" round>信息按钮</el-button>
+        <el-button type="warning" round>警告按钮</el-button>
+        <el-button type="danger" round>危险按钮</el-button>
+    </el-row>
+
+    <el-row>
+        <el-button icon="el-icon-search" circle></el-button>
+        <el-button type="primary" icon="el-icon-edit" circle></el-button>
+        <el-button type="success" icon="el-icon-check" circle></el-button>
+        <el-button type="info" icon="el-icon-message" circle></el-button>
+        <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+        <el-button type="danger" icon="el-icon-delete" circle></el-button>
+    </el-row>-->
+</div>
+
+
+<script src="js/axios-0.18.0.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="js/element-ui/lib/theme-chalk/index.css">
+
+<script>
+    new Vue({
+        el:"#app"
+    })
+
+</script>
+
+</body>
+</html>

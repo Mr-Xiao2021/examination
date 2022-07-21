@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- 网页使用的语言 -->
+<html lang="zh-CN">
+<head>
+    <base href="<%=basePath%>"/>
+    <!-- 指定字符集 -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户注册</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/axios-0.18.0.js"></script>
+
+
+</head>
+<body>
+<div class="container" style="width: 400px;" id="app">
+    <h3 style="text-align: center;">学生注册</h3>
+    <form action="/examination/addStuServlet" method="post">
+
+        <div class="form-group">
+            <label for="">学号：</label>
+            <input type="text" class="form-control" id="studentId" v-on:blur="blurConfirmSId" name="studentId" placeholder="申请你的注册学号"/>
+            <span id="isExistMsg" style="color: red"> </span>
+        </div>
+
+        <div class="form-group">
+            <label for="name">姓名：</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="请输入姓名"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">创建密码：</label>
+            <input type="text" class="form-control" id="password" name="password" placeholder="创建密码"/>
+        </div>
+
+
+        <div class="form-group">
+            <label for="password">确认密码：</label>
+            <input type="text" class="form-control" id="confirmPassword" v-on:blur="blurConfirmPsw" name="confirmPassword" placeholder="确认密码"/>
+            <span id="confirmPswMsg" style="color: red"> </span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="">所属专业：</label>
+            <select name="majorId" id="majorId" class="form-control">
+                <option value="1">软件工程</option>
+                <option value="2">数字媒体</option>
+                <option value="3">人工智能</option>
+                <option value="4">通信工程</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="">所属教师：</label>
+            <select name="teacherId" id="teacherId" class="form-control">
+                <option value="123">宋亮亮</option>
+                <option value="234">王梅红</option>
+                <option value="312">曾铭</option>
+                <option value="456">张海燕</option>
+                <option value="789">王老吉</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="">Email：</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱地址"/>
+        </div>
+
+        <div class="form-group" style="text-align: center">
+            <input class="btn btn-primary" type="submit" id="submitBtn" value="提交"/>
+            <input class="btn btn-default" type="reset" value="重置"/>
+            <input class="btn btn-default" type="button" value="返回"/>
+        </div>
+    </form>
+</div>
+
+<script src="js/vue.js"></script>
+<script>
+    // $("#studentId").blur(function () {
+    //
+    // })
+
+
+    let info = "studentId=" + $("#studentId").val() + "&password=" + $("#password").val() + "&teacherId="
+        + $("#teacherId").val() + "&majorId=" + $("#majorId").val() + "&name=" + $("#name").val() + "&email=" + $("#email").val();
+
+    // $("#submitBtn").click(function () {
+    //     // var params = new URLSearchParams();
+    //     // params.append('studentId',$("#studentId").val());
+    //     // params.append('password',$("#password").val());
+    //     // params.append('teacherId',$("#teacherId").val());
+    //     // params.append('majorId',$("#majorId").val());
+    //     // params.append('name',$("#name").val());
+    //     // params.append('email',$("#email").val());
+    //     axios({
+    //         method: "get",
+    //         url: "http://localhost:8080/examination/findStuByIdServlet?"+info
+    //     }).then(function (resp) {
+    //         let isSuccess = resp.data.isSuccess;
+    //         if (isSuccess) {
+    //             alert("注册失败！")
+    //         } else {
+    //             alert("注册成功，即将跳转登录页面");
+    //             // location.href = "http://localhost:8080/examination/login.html";
+    //         }
+    //     })
+    // })
+
+    new Vue({
+        el:"#app",
+        methods: {
+            blurConfirmPsw:function (){
+                if($("#password").val().length === 0){
+                    $("#confirmPswMsg").html("请先输出创建密码！");
+                }else if($("#password").val() !== $("#confirmPassword").val()){
+                    $("#confirmPswMsg").html("确认密码与创建密码不一致！");
+                }else{
+                    $("#confirmPswMsg").html("");
+                }
+            },
+            blurConfirmSId:function (){
+                alert("学号输入框离开焦点");
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/examination/findStuByIdServlet",
+                    data: "studentId=" + $("#studentId").val()
+                }).then(function (resp) {
+                    var isExist = resp.data.isExist;
+                    if (isExist) {
+                        $("#isExistMsg").html("该学号已被占用，请更换一个！")
+                    } else {
+                        $("#isExistMsg").html("");
+                    }
+                })
+            }
+
+        }
+    })
+
+</script>
+</body>
+</html>
